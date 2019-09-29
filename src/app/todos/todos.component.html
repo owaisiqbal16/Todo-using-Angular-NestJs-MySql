@@ -6,7 +6,7 @@
 <ul>
     <li *ngFor="let todo of todos">
         <span>{{todo.title}}</span>
-        <button class="delete">X</button>
+        <button class="delete" (click)="deleteTodo(todo)">X</button>
     </li>
 </ul>
 

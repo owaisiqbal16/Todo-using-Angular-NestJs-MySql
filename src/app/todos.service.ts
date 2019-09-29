@@ -19,6 +19,19 @@ export class TodosService {
   ) { }
 
   getTodos() : Observable<Todo[]>{
-    return this.http.get<Todo[]>('http://localhost:3000/todos')
+    return this.http.get<Todo[]>('http://localhost:3000/todos');
   }
+
+  addTodo( todo : Todo ) : Observable<Todo> {
+    return this.http.post<Todo>('http://localhost:3000/todos' , todo , this.httpOptions);
+  }
+
+  updateHero( todo : Todo ) : Observable<Todo> {
+    return this.http.put<Todo>(`http://localhost:3000/todos/${todo.id}` , todo , this.httpOptions);
+  }
+
+  deleteTodo( todo : Todo ) : Observable<Todo> {
+    return this.http.delete<Todo>(`http://localhost:3000/todos/${todo.id}` , this.httpOptions)
+  }
+
 }
