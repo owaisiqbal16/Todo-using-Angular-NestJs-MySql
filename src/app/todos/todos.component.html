@@ -1,8 +1,10 @@
 <p>Todos component</p>
-<form class="form">
-    <input type="text" name="title" placeholder="Add todo...">
-    <input type="submit" value="Submit" class="btn">
-</form>
+
+<label>Add Todo
+    <input #todoTitle />
+</label>
+<button (click)="addTodo(todoTitle.value); todoTitle.value=''">Add</button>
+
 <ul>
     <li *ngFor="let todo of todos">
         <span>{{todo.title}}</span>
