@@ -55,7 +55,7 @@ export class TodosComponent implements OnInit {
     this.todosService.updateTodo(this.myTodo)
       .subscribe( () => {
         this.getTodos();
+        this.myTodo = null;
     })
   }
-
 }

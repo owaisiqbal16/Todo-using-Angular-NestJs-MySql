@@ -1,26 +1,40 @@
-<p>Todos component</p>
-
 <!-- <label>Add Todo
     <input #todoTitle />
 </label>
 <button (click)="addTodo(todoTitle.value); todoTitle.value=''">Add</button> -->
 
 <form class="form" (ngSubmit)="updateTodo()" *ngIf="myTodo">
-    <input type="text" name="title" [(ngModel)]="myTodo.title">
-    <input type="submit" value="Update" clas="btn">
+    <div class="input-group mb-4">
+        <input type="text" class="form-control" name="title" [(ngModel)]="myTodo.title" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <div class="input-group-append">
+            <input type="submit" class="btn btn-outline-secondary" value="Update" clas="btn">
+        </div>
+    </div>
 </form>
 
 <form class="form" (ngSubmit)="onSubmit()" *ngIf="!myTodo">
-    <input type="text" name="title" [(ngModel)]="title" placeholder="Add Todo...">
-    <input type="submit" value="Add" class="btn">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="title" [(ngModel)]="title" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <input type="submit" class="btn btn-outline-secondary" value="Add" clas="btn">
+            </div>
+        </div>
 </form>
 
 
-<ul>
+<ul class="list-unstyled">
     <li *ngFor="let todo of todos">
-        <span>{{todo.title}}</span>
-        <button class="delete" (click)="deleteTodo(todo)">Delete</button>
-        <button class="update" (click)="updateClicked(todo)">Update</button>
+        <hr>
+        <div class="row mb-2">
+            <div class="col-6 text-left">
+                <span class="lead">{{todo.title}}</span>
+            </div>
+            <div class="col-6 text-right">
+                <button class="btn btn-primary mr-2" [disabled]="myTodo" (click)="updateClicked(todo)">Update</button>
+                <button class="btn btn-danger" [disabled]="myTodo" (click)="deleteTodo(todo)">Delete</button>
+            </div>    
+        </div>
     </li>
 </ul>
+
 
