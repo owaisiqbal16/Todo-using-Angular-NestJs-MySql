@@ -5,7 +5,7 @@ export type User = any;
 
 @Injectable()
 export class UsersService {
-    prvate readonly users: User[];
+    private readonly users: User[];
 
     constructor(){
         this.users = [
