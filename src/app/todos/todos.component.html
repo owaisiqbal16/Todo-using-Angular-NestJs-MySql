@@ -1,14 +1,26 @@
 <p>Todos component</p>
 
-<label>Add Todo
+<!-- <label>Add Todo
     <input #todoTitle />
 </label>
-<button (click)="addTodo(todoTitle.value); todoTitle.value=''">Add</button>
+<button (click)="addTodo(todoTitle.value); todoTitle.value=''">Add</button> -->
+
+<form class="form" (ngSubmit)="updateTodo()" *ngIf="myTodo">
+    <input type="text" name="title" [(ngModel)]="myTodo.title">
+    <input type="submit" value="Update" clas="btn">
+</form>
+
+<form class="form" (ngSubmit)="onSubmit()" *ngIf="!myTodo">
+    <input type="text" name="title" [(ngModel)]="title" placeholder="Add Todo...">
+    <input type="submit" value="Add" class="btn">
+</form>
+
 
 <ul>
     <li *ngFor="let todo of todos">
         <span>{{todo.title}}</span>
-        <button class="delete" (click)="deleteTodo(todo)">X</button>
+        <button class="delete" (click)="deleteTodo(todo)">Delete</button>
+        <button class="update" (click)="updateClicked(todo)">Update</button>
     </li>
 </ul>
 

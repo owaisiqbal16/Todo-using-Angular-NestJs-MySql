@@ -26,7 +26,7 @@ export class TodosService {
     return this.http.post<Todo>('http://localhost:3000/todos' , todo , this.httpOptions);
   }
 
-  updateHero( todo : Todo ) : Observable<Todo> {
+  updateTodo( todo : Todo ) : Observable<Todo> {
     return this.http.put<Todo>(`http://localhost:3000/todos/${todo.id}` , todo , this.httpOptions);
   }
 

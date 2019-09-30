@@ -15,15 +15,24 @@ export class TodosComponent implements OnInit {
     this.getTodos();  
   }
 
-  todos: Todo[]
+  todos: Todo[];
+  title : string;
+  myTodo : Todo = null;
 
   getTodos() : void {
     this.todosService.getTodos()
       .subscribe( todos => this.todos = todos);
   }
+  
+  onSubmit() {
+    const todo = {
+      title : this.title
+    }
+    this.addTodo(todo.title);
+  }
 
   addTodo(title : string): void {
-    if (!title) { return; }
+    if (!title) { return; console.log("No title given") }
     this.todosService.addTodo({title} as Todo)
       .subscribe(todo => {
         this.todos.push(todo);
@@ -36,6 +45,17 @@ export class TodosComponent implements OnInit {
     this.todosService.deleteTodo(todo).subscribe();
   }
 
-  
+  updateClicked(todo) : void {
+    this.myTodo = todo;
+    console.log(this.myTodo)
+  }
+
+  updateTodo() : void {
+    console.log(this.myTodo)
+    this.todosService.updateTodo(this.myTodo)
+      .subscribe( () => {
+        this.getTodos();
+    })
+  }
 
 }
