@@ -10,12 +10,18 @@ export class AuthService {
         private readonly jwtService: JwtService 
     ) {}
 
-    private async validate(userData: User): Promise<User> {
-        return await this.usersService.findByEmail(userData.email);
+    async validate(userData: User): Promise<any> {
+        const user = await this.usersService.findByEmail(userData.email);
+        if( user && user.password === userData.password ){
+            const { password , ...result } = user;
+            return result;
+        }
+        return null;
     }
 
     public async login(user: User): Promise< any | { status: number }>{
         return this.validate(user).then((userData)=>{
+            console.log(user)
           if(!userData){
             return { status: 404 };
           }

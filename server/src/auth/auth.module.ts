@@ -8,11 +8,11 @@ import { AuthService } from './auth.service';
 
 // import { AuthService } from './auth.service';
 // import { UsersModule } from '../users/users.module';
-// import { PassportModule } from '@nestjs/passport';
-// import { LocalStrategy } from './local.strategy';
+import { PassportModule } from '@nestjs/passport';
+import { LocalStrategy } from './local.strategy';
 // import { JwtModule } from '@nestjs/jwt';
 // import { jwtConstants } from './constants';
-// import { JwtStrategy } from './jwt.strategy';
+import { JwtStrategy } from './jwt.strategy';
 
 
 @Module({
@@ -26,9 +26,10 @@ import { AuthService } from './auth.service';
     TypeOrmModule.forFeature([User]),
     JwtModule.register({
       secretOrPrivateKey: 'secret123456789'
-    })
+    }),
+    PassportModule
   ],
-  providers: [UsersService , AuthService],
+  providers: [UsersService , AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController]
   // providers: [AuthService, LocalStrategy, JwtStrategy],
   // exports: [AuthService]
