@@ -25,13 +25,13 @@ export class AuthService {
           if(!userData){
             return { status: 404 };
           }
-          let payload = `${userData.name}${userData.id}`;
+          let payload = { name:userData.name , id:userData.id , email:userData.email };
           const accessToken = this.jwtService.sign(payload);
 
           return {
              expires_in: 3600,
              access_token: accessToken,
-             user_id: payload,
+             user: payload,
              status: 200
           };
 
