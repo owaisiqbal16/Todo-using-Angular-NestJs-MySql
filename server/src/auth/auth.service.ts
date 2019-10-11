@@ -20,9 +20,10 @@ export class AuthService {
     }
 
     public async login(user: User): Promise< any | { status: number }>{
-        return this.validate(user).then((userData)=>{
-            console.log(user)
+        return this.validate(user).then( userData =>{
+            // console.log(userData)
           if(!userData){
+            //   console.log("no user data")
             return { status: 404 };
           }
           let payload = { name:userData.name , id:userData.id , email:userData.email };
@@ -37,7 +38,6 @@ export class AuthService {
 
         });
     }
-
     public async register(user: User): Promise<any>{
         return this.usersService.create(user)
     }
