@@ -11,13 +11,30 @@ export class AuthService {
   httpOptions = {
     headers : new HttpHeaders({ 'Content-Type' : 'application/json'})
   }
+
+  authOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'auth-token': `${localStorage.getItem('currentUser')}`,
+    }),
+  };
+
+  isAuthenticated : boolean = false;
+  user = null;
+
   constructor(private http: HttpClient) { }
 
-  getProfile() : Observable<User[]>{
-    return this.http.get<User[]>('http://localhost:3000/auth/me');
+  getProfile() : Observable<any>{
+    console.log(localStorage.getItem('currentUser'))
+    return this.http.get<any>('http://localhost:3000/auth/me' , this.authOptions).pipe(
+      tap(( userData : any ) => {
+        this.user = userData;
+        this.isAuthenticated = true
+      })
+    );
   }
 
-  loginUser( user : User ) : Observable<User> {
+  loginUser( user : User ) : Observable<any> {
     console.log(user);
     return this.http.post<any>('http://localhost:3000/auth/login' , user , this.httpOptions)
       // .pipe(

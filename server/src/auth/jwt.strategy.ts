@@ -8,7 +8,7 @@ import { AdvancedConsoleLogger } from 'typeorm';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromHeader('auth_token'),
+      jwtFromRequest: ExtractJwt.fromHeader('auth-token'),
       ignoreExpiration: false,
       secretOrKey: 'secret123456789',
     });
