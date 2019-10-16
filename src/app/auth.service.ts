@@ -45,7 +45,16 @@ export class AuthService {
         // return user;
       // )
       };
-  }
+
+      registerUser( userData: User ) : Observable<any> {
+        return this.http.post<any>('http://localhost:3000/auth/register' , userData , this.httpOptions)
+        // .pipe(
+        //   tap((authToken : any ) => {
+        //     this.loginUser(`added user w/ id=${authToken}`);
+        //   })
+        // )
+      }
+  } 
 
   // registerUser( todo : Todo ) : Observable<Todo> {
   //   return this.http.put<Todo>(`http://localhost:3000/todos/${todo.id}` , todo , this.httpOptions);
